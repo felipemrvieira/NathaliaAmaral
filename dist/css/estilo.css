@@ -1,0 +1,8 @@
+#estoque {
+  display: none;
+}
+
+
+input[name=estoque]:checked ~ #estoque  {
+  display:block !important;
+}
