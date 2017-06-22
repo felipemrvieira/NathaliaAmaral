@@ -177,6 +177,19 @@ function listaCliente($conexao, $nome){
     return $array_clientes;
 }
 
+function listaClienteEmOrdem($conexao, $nome){
+    $array_clientes = array();
+    $resultado = mysqli_query($conexao, "select *
+                                            from cliente
+                                            where nome_cliente LIKE '%{$nome}%'
+                                            order by nome_cliente");
+
+    while($cliente = mysqli_fetch_assoc($resultado)){
+        array_push($array_clientes, $cliente);
+    }
+    return $array_clientes;
+}
+
 function listaTerceiros($conexao){
     $array_terceiros = array();
     $resultado = mysqli_query($conexao, "select *

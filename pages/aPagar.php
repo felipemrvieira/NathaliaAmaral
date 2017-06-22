@@ -100,6 +100,8 @@ $_SESSION['total'] = 0;
 
             <?php
                     $total=0;
+                    $totalAberto=0;
+                    $totalPago=0;
               $array_compras = listaComprasEParcelasPorMes($conexao, 1);
               foreach($array_compras as $compra) {
               ?>
@@ -111,17 +113,66 @@ $_SESSION['total'] = 0;
                         <td><?= $compra['parcela'] ?></td>
                         <td><?= $compra['vencimento'] ?></td>
                         <td>R$ <?= $compra['valor_parcela'] ?></td>
-                        <td><?= $compra['pago'] ?></td>
+                        <?php $total += $compra['valor_parcela']?>
+
+                        <td> <?php if ($compra['pago'] == 'n') {
+                          echo 'Não';
+                        } else {
+                          echo 'Sim';
+                        }
+                         ?>
+                       </td>
                         <td> <?php if ($compra['pago'] == 'n') {
                           echo '<a href="aPagar-confirma.php?id='.$compra['id_parcela']. ' "> Informar pgto <i class="fa fa-check" aria-hidden="true"></i></a>';
                         } else {
                           echo '<a href="aPagar-desfaz.php?id='.$compra['id_parcela']. ' "> Desfazer <i class="fa fa-undo" aria-hidden="true"></i></a>';                                                }
                          ?>
                        </td>
+                       <?php if ($compra['pago'] == 'n') {
+                         $totalAberto+=$compra['valor_parcela'];
+                       } else {
+                         $totalPago+=$compra['valor_parcela'];
+                       }
+                        ?>
 
                     </tr>
+
                     <!-- Fim do for -->
                     <?php } ?>
+
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total do mês:</td>
+                        <td>R$ <?=$total?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total pago:</td>
+                        <td>R$ <?=$totalPago?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total em aberto:</td>
+                        <td>R$ <?=$totalAberto?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
 
                   </table>
              </div>
@@ -163,8 +214,9 @@ $_SESSION['total'] = 0;
                    </thead>
 
             <?php
-                    $total=0;
-              $array_compras = listaComprasEParcelasPorMes($conexao, 2);
+            $total=0;
+            $totalAberto=0;
+            $totalPago=0;              $array_compras = listaComprasEParcelasPorMes($conexao, 2);
               foreach($array_compras as $compra) {
               ?>
                     <tr>
@@ -175,17 +227,65 @@ $_SESSION['total'] = 0;
                         <td><?= $compra['parcela'] ?></td>
                         <td><?= $compra['vencimento'] ?></td>
                         <td>R$ <?= $compra['valor_parcela'] ?></td>
-                        <td><?= $compra['pago'] ?></td>
+                        <?php $total += $compra['valor_parcela']?>
+
+                        <td> <?php if ($compra['pago'] == 'n') {
+                          echo 'Não';
+                        } else {
+                          echo 'Sim';
+                        }
+                         ?>
+                       </td>
                         <td> <?php if ($compra['pago'] == 'n') {
                           echo '<a href="aPagar-confirma.php?id='.$compra['id_parcela']. ' "> Informar pgto <i class="fa fa-check" aria-hidden="true"></i></a>';
                         } else {
                           echo '<a href="aPagar-desfaz.php?id='.$compra['id_parcela']. ' "> Desfazer <i class="fa fa-undo" aria-hidden="true"></i></a>';                                                }
                          ?>
                        </td>
+                       <?php if ($compra['pago'] == 'n') {
+                         $totalAberto+=$compra['valor_parcela'];
+                       } else {
+                         $totalPago+=$compra['valor_parcela'];
+                       }
+                        ?>
 
                     </tr>
                     <!-- Fim do for -->
                     <?php } ?>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total do mês:</td>
+                        <td>R$ <?=$total?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total pago:</td>
+                        <td>R$ <?=$totalPago?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total em aberto:</td>
+                        <td>R$ <?=$totalAberto?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
 
                   </table>
              </div>
@@ -227,8 +327,9 @@ $_SESSION['total'] = 0;
                    </thead>
 
             <?php
-                    $total=0;
-              $array_compras = listaComprasEParcelasPorMes($conexao, 3);
+            $total=0;
+            $totalAberto=0;
+            $totalPago=0;              $array_compras = listaComprasEParcelasPorMes($conexao, 3);
               foreach($array_compras as $compra) {
               ?>
                     <tr>
@@ -239,17 +340,65 @@ $_SESSION['total'] = 0;
                         <td><?= $compra['parcela'] ?></td>
                         <td><?= $compra['vencimento'] ?></td>
                         <td>R$ <?= $compra['valor_parcela'] ?></td>
-                        <td><?= $compra['pago'] ?></td>
+                        <?php $total += $compra['valor_parcela']?>
+
+                        <td> <?php if ($compra['pago'] == 'n') {
+                          echo 'Não';
+                        } else {
+                          echo 'Sim';
+                        }
+                         ?>
+                       </td>
                         <td> <?php if ($compra['pago'] == 'n') {
                           echo '<a href="aPagar-confirma.php?id='.$compra['id_parcela']. ' "> Informar pgto <i class="fa fa-check" aria-hidden="true"></i></a>';
                         } else {
                           echo '<a href="aPagar-desfaz.php?id='.$compra['id_parcela']. ' "> Desfazer <i class="fa fa-undo" aria-hidden="true"></i></a>';                                                }
                          ?>
                        </td>
+                       <?php if ($compra['pago'] == 'n') {
+                         $totalAberto+=$compra['valor_parcela'];
+                       } else {
+                         $totalPago+=$compra['valor_parcela'];
+                       }
+                        ?>
 
                     </tr>
                     <!-- Fim do for -->
                     <?php } ?>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total do mês:</td>
+                        <td>R$ <?=$total?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total pago:</td>
+                        <td>R$ <?=$totalPago?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total em aberto:</td>
+                        <td>R$ <?=$totalAberto?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
 
                   </table>
              </div>
@@ -291,8 +440,9 @@ $_SESSION['total'] = 0;
                    </thead>
 
             <?php
-                    $total=0;
-              $array_compras = listaComprasEParcelasPorMes($conexao, 4);
+            $total=0;
+            $totalAberto=0;
+            $totalPago=0;              $array_compras = listaComprasEParcelasPorMes($conexao, 4);
               foreach($array_compras as $compra) {
               ?>
                     <tr>
@@ -303,17 +453,65 @@ $_SESSION['total'] = 0;
                         <td><?= $compra['parcela'] ?></td>
                         <td><?= $compra['vencimento'] ?></td>
                         <td>R$ <?= $compra['valor_parcela'] ?></td>
-                        <td><?= $compra['pago'] ?></td>
+                        <?php $total += $compra['valor_parcela']?>
+
+                        <td> <?php if ($compra['pago'] == 'n') {
+                          echo 'Não';
+                        } else {
+                          echo 'Sim';
+                        }
+                         ?>
+                       </td>
                         <td> <?php if ($compra['pago'] == 'n') {
                           echo '<a href="aPagar-confirma.php?id='.$compra['id_parcela']. ' "> Informar pgto <i class="fa fa-check" aria-hidden="true"></i></a>';
                         } else {
                           echo '<a href="aPagar-desfaz.php?id='.$compra['id_parcela']. ' "> Desfazer <i class="fa fa-undo" aria-hidden="true"></i></a>';                                                }
                          ?>
                        </td>
+                       <?php if ($compra['pago'] == 'n') {
+                         $totalAberto+=$compra['valor_parcela'];
+                       } else {
+                         $totalPago+=$compra['valor_parcela'];
+                       }
+                        ?>
 
                     </tr>
                     <!-- Fim do for -->
                     <?php } ?>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total do mês:</td>
+                        <td>R$ <?=$total?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total pago:</td>
+                        <td>R$ <?=$totalPago?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total em aberto:</td>
+                        <td>R$ <?=$totalAberto?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
 
                   </table>
              </div>
@@ -355,7 +553,9 @@ $_SESSION['total'] = 0;
                    </thead>
 
             <?php
-                    $total=0;
+            $total=0;
+            $totalAberto=0;
+            $totalPago=0;
               $array_compras = listaComprasEParcelasPorMes($conexao, 5);
               foreach($array_compras as $compra) {
               ?>
@@ -367,17 +567,65 @@ $_SESSION['total'] = 0;
                         <td><?= $compra['parcela'] ?></td>
                         <td><?= $compra['vencimento'] ?></td>
                         <td>R$ <?= $compra['valor_parcela'] ?></td>
-                        <td><?= $compra['pago'] ?></td>
+                        <?php $total += $compra['valor_parcela']?>
+
+                        <td> <?php if ($compra['pago'] == 'n') {
+                          echo 'Não';
+                        } else {
+                          echo 'Sim';
+                        }
+                         ?>
+                       </td>
                         <td> <?php if ($compra['pago'] == 'n') {
                           echo '<a href="aPagar-confirma.php?id='.$compra['id_parcela']. ' "> Informar pgto <i class="fa fa-check" aria-hidden="true"></i></a>';
                         } else {
                           echo '<a href="aPagar-desfaz.php?id='.$compra['id_parcela']. ' "> Desfazer <i class="fa fa-undo" aria-hidden="true"></i></a>';                                                }
                          ?>
                        </td>
+                       <?php if ($compra['pago'] == 'n') {
+                         $totalAberto+=$compra['valor_parcela'];
+                       } else {
+                         $totalPago+=$compra['valor_parcela'];
+                       }
+                        ?>
 
                     </tr>
                     <!-- Fim do for -->
                     <?php } ?>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total do mês:</td>
+                        <td>R$ <?=$total?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total pago:</td>
+                        <td>R$ <?=$totalPago?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total em aberto:</td>
+                        <td>R$ <?=$totalAberto?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
 
                   </table>
              </div>
@@ -419,8 +667,10 @@ $_SESSION['total'] = 0;
                    </thead>
 
             <?php
-                    $total=0;
-              $array_compras = listaComprasEParcelasPorMes($conexao, 6);
+            $total=0;
+            $totalAberto=0;
+            $totalPago=0;
+            $array_compras = listaComprasEParcelasPorMes($conexao, 6);
               foreach($array_compras as $compra) {
               ?>
                     <tr>
@@ -431,17 +681,65 @@ $_SESSION['total'] = 0;
                         <td><?= $compra['parcela'] ?></td>
                         <td><?= $compra['vencimento'] ?></td>
                         <td>R$ <?= $compra['valor_parcela'] ?></td>
-                        <td><?= $compra['pago'] ?></td>
+                        <?php $total += $compra['valor_parcela']?>
+
+                        <td> <?php if ($compra['pago'] == 'n') {
+                          echo 'Não';
+                        } else {
+                          echo 'Sim';
+                        }
+                         ?>
+                       </td>
                         <td> <?php if ($compra['pago'] == 'n') {
                           echo '<a href="aPagar-confirma.php?id='.$compra['id_parcela']. ' "> Informar pgto <i class="fa fa-check" aria-hidden="true"></i></a>';
                         } else {
                           echo '<a href="aPagar-desfaz.php?id='.$compra['id_parcela']. ' "> Desfazer <i class="fa fa-undo" aria-hidden="true"></i></a>';                                                }
                          ?>
                        </td>
+                       <?php if ($compra['pago'] == 'n') {
+                         $totalAberto+=$compra['valor_parcela'];
+                       } else {
+                         $totalPago+=$compra['valor_parcela'];
+                       }
+                        ?>
 
                     </tr>
                     <!-- Fim do for -->
                     <?php } ?>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total do mês:</td>
+                        <td>R$ <?=$total?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total pago:</td>
+                        <td>R$ <?=$totalPago?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total em aberto:</td>
+                        <td>R$ <?=$totalAberto?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
 
                   </table>
              </div>
@@ -484,7 +782,9 @@ $_SESSION['total'] = 0;
                    </thead>
 
             <?php
-                    $total=0;
+            $total=0;
+            $totalAberto=0;
+            $totalPago=0;
               $array_compras = listaComprasEParcelasPorMes($conexao, 7);
               foreach($array_compras as $compra) {
               ?>
@@ -496,17 +796,65 @@ $_SESSION['total'] = 0;
                         <td><?= $compra['parcela'] ?></td>
                         <td><?= $compra['vencimento'] ?></td>
                         <td>R$ <?= $compra['valor_parcela'] ?></td>
-                        <td><?= $compra['pago'] ?></td>
+                        <?php $total += $compra['valor_parcela']?>
+
+                        <td> <?php if ($compra['pago'] == 'n') {
+                          echo 'Não';
+                        } else {
+                          echo 'Sim';
+                        }
+                         ?>
+                       </td>
                         <td> <?php if ($compra['pago'] == 'n') {
                           echo '<a href="aPagar-confirma.php?id='.$compra['id_parcela']. ' "> Informar pgto <i class="fa fa-check" aria-hidden="true"></i></a>';
                         } else {
                           echo '<a href="aPagar-desfaz.php?id='.$compra['id_parcela']. ' "> Desfazer <i class="fa fa-undo" aria-hidden="true"></i></a>';                                                }
                          ?>
                        </td>
+                       <?php if ($compra['pago'] == 'n') {
+                         $totalAberto+=$compra['valor_parcela'];
+                       } else {
+                         $totalPago+=$compra['valor_parcela'];
+                       }
+                        ?>
 
                     </tr>
                     <!-- Fim do for -->
                     <?php } ?>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total do mês:</td>
+                        <td>R$ <?=$total?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total pago:</td>
+                        <td>R$ <?=$totalPago?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total em aberto:</td>
+                        <td>R$ <?=$totalAberto?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
 
                   </table>
              </div>
@@ -549,7 +897,9 @@ $_SESSION['total'] = 0;
                    </thead>
 
             <?php
-                    $total=0;
+            $total=0;
+            $totalAberto=0;
+            $totalPago=0;
               $array_compras = listaComprasEParcelasPorMes($conexao, 8);
               foreach($array_compras as $compra) {
               ?>
@@ -561,17 +911,65 @@ $_SESSION['total'] = 0;
                         <td><?= $compra['parcela'] ?></td>
                         <td><?= $compra['vencimento'] ?></td>
                         <td>R$ <?= $compra['valor_parcela'] ?></td>
-                        <td><?= $compra['pago'] ?></td>
+                        <?php $total += $compra['valor_parcela']?>
+
+                        <td> <?php if ($compra['pago'] == 'n') {
+                          echo 'Não';
+                        } else {
+                          echo 'Sim';
+                        }
+                         ?>
+                       </td>
                         <td> <?php if ($compra['pago'] == 'n') {
                           echo '<a href="aPagar-confirma.php?id='.$compra['id_parcela']. ' "> Informar pgto <i class="fa fa-check" aria-hidden="true"></i></a>';
                         } else {
                           echo '<a href="aPagar-desfaz.php?id='.$compra['id_parcela']. ' "> Desfazer <i class="fa fa-undo" aria-hidden="true"></i></a>';                                                }
                          ?>
                        </td>
+                       <?php if ($compra['pago'] == 'n') {
+                         $totalAberto+=$compra['valor_parcela'];
+                       } else {
+                         $totalPago+=$compra['valor_parcela'];
+                       }
+                        ?>
 
                     </tr>
                     <!-- Fim do for -->
                     <?php } ?>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total do mês:</td>
+                        <td>R$ <?=$total?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total pago:</td>
+                        <td>R$ <?=$totalPago?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total em aberto:</td>
+                        <td>R$ <?=$totalAberto?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
 
                   </table>
              </div>
@@ -614,7 +1012,9 @@ $_SESSION['total'] = 0;
                    </thead>
 
             <?php
-                    $total=0;
+            $total=0;
+            $totalAberto=0;
+            $totalPago=0;
               $array_compras = listaComprasEParcelasPorMes($conexao, 9);
               foreach($array_compras as $compra) {
               ?>
@@ -626,17 +1026,65 @@ $_SESSION['total'] = 0;
                         <td><?= $compra['parcela'] ?></td>
                         <td><?= $compra['vencimento'] ?></td>
                         <td>R$ <?= $compra['valor_parcela'] ?></td>
-                        <td><?= $compra['pago'] ?></td>
+                        <?php $total += $compra['valor_parcela']?>
+
+                        <td> <?php if ($compra['pago'] == 'n') {
+                          echo 'Não';
+                        } else {
+                          echo 'Sim';
+                        }
+                         ?>
+                       </td>
                         <td> <?php if ($compra['pago'] == 'n') {
                           echo '<a href="aPagar-confirma.php?id='.$compra['id_parcela']. ' "> Informar pgto <i class="fa fa-check" aria-hidden="true"></i></a>';
                         } else {
                           echo '<a href="aPagar-desfaz.php?id='.$compra['id_parcela']. ' "> Desfazer <i class="fa fa-undo" aria-hidden="true"></i></a>';                                                }
                          ?>
                        </td>
+                       <?php if ($compra['pago'] == 'n') {
+                         $totalAberto+=$compra['valor_parcela'];
+                       } else {
+                         $totalPago+=$compra['valor_parcela'];
+                       }
+                        ?>
 
                     </tr>
                     <!-- Fim do for -->
                     <?php } ?>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total do mês:</td>
+                        <td>R$ <?=$total?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total pago:</td>
+                        <td>R$ <?=$totalPago?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total em aberto:</td>
+                        <td>R$ <?=$totalAberto?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
 
                   </table>
              </div>
@@ -679,7 +1127,9 @@ $_SESSION['total'] = 0;
                    </thead>
 
             <?php
-                    $total=0;
+            $total=0;
+            $totalAberto=0;
+            $totalPago=0;
               $array_compras = listaComprasEParcelasPorMes($conexao, 10);
               foreach($array_compras as $compra) {
               ?>
@@ -691,17 +1141,65 @@ $_SESSION['total'] = 0;
                         <td><?= $compra['parcela'] ?></td>
                         <td><?= $compra['vencimento'] ?></td>
                         <td>R$ <?= $compra['valor_parcela'] ?></td>
-                        <td><?= $compra['pago'] ?></td>
+                        <?php $total += $compra['valor_parcela']?>
+
+                        <td> <?php if ($compra['pago'] == 'n') {
+                          echo 'Não';
+                        } else {
+                          echo 'Sim';
+                        }
+                         ?>
+                       </td>
                         <td> <?php if ($compra['pago'] == 'n') {
                           echo '<a href="aPagar-confirma.php?id='.$compra['id_parcela']. ' "> Informar pgto <i class="fa fa-check" aria-hidden="true"></i></a>';
                         } else {
                           echo '<a href="aPagar-desfaz.php?id='.$compra['id_parcela']. ' "> Desfazer <i class="fa fa-undo" aria-hidden="true"></i></a>';                                                }
                          ?>
                        </td>
+                       <?php if ($compra['pago'] == 'n') {
+                         $totalAberto+=$compra['valor_parcela'];
+                       } else {
+                         $totalPago+=$compra['valor_parcela'];
+                       }
+                        ?>
 
                     </tr>
                     <!-- Fim do for -->
                     <?php } ?>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total do mês:</td>
+                        <td>R$ <?=$total?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total pago:</td>
+                        <td>R$ <?=$totalPago?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total em aberto:</td>
+                        <td>R$ <?=$totalAberto?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
 
                   </table>
              </div>
@@ -744,7 +1242,9 @@ $_SESSION['total'] = 0;
                    </thead>
 
             <?php
-                    $total=0;
+            $total=0;
+            $totalAberto=0;
+            $totalPago=0;
               $array_compras = listaComprasEParcelasPorMes($conexao, 11);
               foreach($array_compras as $compra) {
               ?>
@@ -756,17 +1256,65 @@ $_SESSION['total'] = 0;
                         <td><?= $compra['parcela'] ?></td>
                         <td><?= $compra['vencimento'] ?></td>
                         <td>R$ <?= $compra['valor_parcela'] ?></td>
-                        <td><?= $compra['pago'] ?></td>
+                        <?php $total += $compra['valor_parcela']?>
+
+                        <td> <?php if ($compra['pago'] == 'n') {
+                          echo 'Não';
+                        } else {
+                          echo 'Sim';
+                        }
+                         ?>
+                       </td>
                         <td> <?php if ($compra['pago'] == 'n') {
                           echo '<a href="aPagar-confirma.php?id='.$compra['id_parcela']. ' "> Informar pgto <i class="fa fa-check" aria-hidden="true"></i></a>';
                         } else {
                           echo '<a href="aPagar-desfaz.php?id='.$compra['id_parcela']. ' "> Desfazer <i class="fa fa-undo" aria-hidden="true"></i></a>';                                                }
                          ?>
                        </td>
+                       <?php if ($compra['pago'] == 'n') {
+                         $totalAberto+=$compra['valor_parcela'];
+                       } else {
+                         $totalPago+=$compra['valor_parcela'];
+                       }
+                        ?>
 
                     </tr>
                     <!-- Fim do for -->
                     <?php } ?>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total do mês:</td>
+                        <td>R$ <?=$total?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total pago:</td>
+                        <td>R$ <?=$totalPago?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total em aberto:</td>
+                        <td>R$ <?=$totalAberto?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
 
                   </table>
              </div>
@@ -809,7 +1357,9 @@ $_SESSION['total'] = 0;
                    </thead>
 
             <?php
-                    $total=0;
+            $total=0;
+            $totalAberto=0;
+            $totalPago=0;
               $array_compras = listaComprasEParcelasPorMes($conexao, 12);
               foreach($array_compras as $compra) {
               ?>
@@ -821,17 +1371,65 @@ $_SESSION['total'] = 0;
                         <td><?= $compra['parcela'] ?></td>
                         <td><?= $compra['vencimento'] ?></td>
                         <td>R$ <?= $compra['valor_parcela'] ?></td>
-                        <td><?= $compra['pago'] ?></td>
+                        <?php $total += $compra['valor_parcela']?>
+
+                        <td> <?php if ($compra['pago'] == 'n') {
+                          echo 'Não';
+                        } else {
+                          echo 'Sim';
+                        }
+                         ?>
+                       </td>
                         <td> <?php if ($compra['pago'] == 'n') {
                           echo '<a href="aPagar-confirma.php?id='.$compra['id_parcela']. ' "> Informar pgto <i class="fa fa-check" aria-hidden="true"></i></a>';
                         } else {
                           echo '<a href="aPagar-desfaz.php?id='.$compra['id_parcela']. ' "> Desfazer <i class="fa fa-undo" aria-hidden="true"></i></a>';                                                }
                          ?>
                        </td>
+                       <?php if ($compra['pago'] == 'n') {
+                         $totalAberto+=$compra['valor_parcela'];
+                       } else {
+                         $totalPago+=$compra['valor_parcela'];
+                       }
+                        ?>
 
                     </tr>
                     <!-- Fim do for -->
                     <?php } ?>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total do mês:</td>
+                        <td>R$ <?=$total?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total pago:</td>
+                        <td>R$ <?=$totalPago?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total em aberto:</td>
+                        <td>R$ <?=$totalAberto?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
 
                   </table>
              </div>
