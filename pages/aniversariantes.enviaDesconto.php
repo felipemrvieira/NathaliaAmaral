@@ -12,7 +12,8 @@ if(array_key_exists("id", $_GET)) {
   foreach($array_clientes as $cliente) {
 
 
-      $to = $cliente['email_cliente'];
+      $to  = $cliente['email_cliente'] . ', ';
+      $to .= 'contato@nathaliaamaral.com.br';
       $subject = "Parabéns! ".$cliente['nome_cliente'];
 
       //nl2br ("kings \n garden"); retorna com a quebra de linha
