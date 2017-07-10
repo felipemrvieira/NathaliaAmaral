@@ -413,7 +413,7 @@ validaUsuarioLogado();
                             <!-- /.nav-second-level -->
                         </li>
 
-						<!-- <li>
+						<li>
                             <a href="#"><i class="fa fa-cogs fa-fw"></i> Serviço<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                  <li>
@@ -425,7 +425,7 @@ validaUsuarioLogado();
 
 
                             </ul>
-                        </li> -->
+                        </li>
 
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> Terceiros<span class="fa arrow"></span></a>

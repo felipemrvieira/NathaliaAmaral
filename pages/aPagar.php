@@ -18,7 +18,7 @@ $_SESSION['total'] = 0;
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header"><img width="40%" src="img/Marca%20sem%20fundo.png"></h1>
+                    <h1 class="page-header">Contas a Pagar</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -107,12 +107,12 @@ $_SESSION['total'] = 0;
               ?>
                     <tr>
                         <td><?= $compra['id'] ?></td>
-                        <td><?= $compra['historico'] ?></td>
+                        <td><a href="compra.editar.php?id=<?= $compra['id'] ?>"><?= $compra['historico'] ?></td></a></td>
                         <td>R$ <?= $compra['total'] ?></td>
                         <td><?= $compra['qtd_parcelas'] ?></td>
                         <td><?= $compra['parcela'] ?></td>
-                        <td><?= $compra['vencimento'] ?></td>
-                        <td>R$ <?= $compra['valor_parcela'] ?></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>"><?= $compra['vencimento'] ?></td></a></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>">R$ <?= $compra['valor_parcela'] ?></a></td>
                         <?php $total += $compra['valor_parcela']?>
 
                         <td> <?php if ($compra['pago'] == 'n') {
@@ -221,12 +221,12 @@ $_SESSION['total'] = 0;
               ?>
                     <tr>
                         <td><?= $compra['id'] ?></td>
-                        <td><?= $compra['historico'] ?></td>
+                        <td><a href="compra.editar.php?id=<?= $compra['id'] ?>"><?= $compra['historico'] ?></td></a></td>
                         <td>R$ <?= $compra['total'] ?></td>
                         <td><?= $compra['qtd_parcelas'] ?></td>
                         <td><?= $compra['parcela'] ?></td>
-                        <td><?= $compra['vencimento'] ?></td>
-                        <td>R$ <?= $compra['valor_parcela'] ?></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>"><?= $compra['vencimento'] ?></td></a></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>">R$ <?= $compra['valor_parcela'] ?></a></td>
                         <?php $total += $compra['valor_parcela']?>
 
                         <td> <?php if ($compra['pago'] == 'n') {
@@ -334,12 +334,12 @@ $_SESSION['total'] = 0;
               ?>
                     <tr>
                         <td><?= $compra['id'] ?></td>
-                        <td><?= $compra['historico'] ?></td>
+                        <td><a href="compra.editar.php?id=<?= $compra['id'] ?>"><?= $compra['historico'] ?></td></a></td>
                         <td>R$ <?= $compra['total'] ?></td>
                         <td><?= $compra['qtd_parcelas'] ?></td>
                         <td><?= $compra['parcela'] ?></td>
-                        <td><?= $compra['vencimento'] ?></td>
-                        <td>R$ <?= $compra['valor_parcela'] ?></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>"><?= $compra['vencimento'] ?></td></a></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>">R$ <?= $compra['valor_parcela'] ?></a></td>
                         <?php $total += $compra['valor_parcela']?>
 
                         <td> <?php if ($compra['pago'] == 'n') {
@@ -447,12 +447,12 @@ $_SESSION['total'] = 0;
               ?>
                     <tr>
                         <td><?= $compra['id'] ?></td>
-                        <td><?= $compra['historico'] ?></td>
+                        <td><a href="compra.editar.php?id=<?= $compra['id'] ?>"><?= $compra['historico'] ?></td></a></td>
                         <td>R$ <?= $compra['total'] ?></td>
                         <td><?= $compra['qtd_parcelas'] ?></td>
                         <td><?= $compra['parcela'] ?></td>
-                        <td><?= $compra['vencimento'] ?></td>
-                        <td>R$ <?= $compra['valor_parcela'] ?></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>"><?= $compra['vencimento'] ?></td></a></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>">R$ <?= $compra['valor_parcela'] ?></a></td>
                         <?php $total += $compra['valor_parcela']?>
 
                         <td> <?php if ($compra['pago'] == 'n') {
@@ -561,12 +561,12 @@ $_SESSION['total'] = 0;
               ?>
                     <tr>
                         <td><?= $compra['id'] ?></td>
-                        <td><?= $compra['historico'] ?></td>
+                        <td><a href="compra.editar.php?id=<?= $compra['id'] ?>"><?= $compra['historico'] ?></td></a></td>
                         <td>R$ <?= $compra['total'] ?></td>
                         <td><?= $compra['qtd_parcelas'] ?></td>
                         <td><?= $compra['parcela'] ?></td>
-                        <td><?= $compra['vencimento'] ?></td>
-                        <td>R$ <?= $compra['valor_parcela'] ?></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>"><?= $compra['vencimento'] ?></td></a></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>">R$ <?= $compra['valor_parcela'] ?></a></td>
                         <?php $total += $compra['valor_parcela']?>
 
                         <td> <?php if ($compra['pago'] == 'n') {
@@ -675,12 +675,12 @@ $_SESSION['total'] = 0;
               ?>
                     <tr>
                         <td><?= $compra['id'] ?></td>
-                        <td><?= $compra['historico'] ?></td>
+                        <td><a href="compra.editar.php?id=<?= $compra['id'] ?>"><?= $compra['historico'] ?></td></a></td>
                         <td>R$ <?= $compra['total'] ?></td>
                         <td><?= $compra['qtd_parcelas'] ?></td>
                         <td><?= $compra['parcela'] ?></td>
-                        <td><?= $compra['vencimento'] ?></td>
-                        <td>R$ <?= $compra['valor_parcela'] ?></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>"><?= $compra['vencimento'] ?></td></a></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>">R$ <?= $compra['valor_parcela'] ?></a></td>
                         <?php $total += $compra['valor_parcela']?>
 
                         <td> <?php if ($compra['pago'] == 'n') {
@@ -790,12 +790,12 @@ $_SESSION['total'] = 0;
               ?>
                     <tr>
                         <td><?= $compra['id'] ?></td>
-                        <td><?= $compra['historico'] ?></td>
+                        <td><a href="compra.editar.php?id=<?= $compra['id'] ?>"><?= $compra['historico'] ?></td></a></td>
                         <td>R$ <?= $compra['total'] ?></td>
                         <td><?= $compra['qtd_parcelas'] ?></td>
                         <td><?= $compra['parcela'] ?></td>
-                        <td><?= $compra['vencimento'] ?></td>
-                        <td>R$ <?= $compra['valor_parcela'] ?></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>"><?= $compra['vencimento'] ?></td></a></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>">R$ <?= $compra['valor_parcela'] ?></a></td>
                         <?php $total += $compra['valor_parcela']?>
 
                         <td> <?php if ($compra['pago'] == 'n') {
@@ -905,12 +905,12 @@ $_SESSION['total'] = 0;
               ?>
                     <tr>
                         <td><?= $compra['id'] ?></td>
-                        <td><?= $compra['historico'] ?></td>
+                        <td><a href="compra.editar.php?id=<?= $compra['id'] ?>"><?= $compra['historico'] ?></td></a></td>
                         <td>R$ <?= $compra['total'] ?></td>
                         <td><?= $compra['qtd_parcelas'] ?></td>
                         <td><?= $compra['parcela'] ?></td>
-                        <td><?= $compra['vencimento'] ?></td>
-                        <td>R$ <?= $compra['valor_parcela'] ?></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>"><?= $compra['vencimento'] ?></td></a></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>">R$ <?= $compra['valor_parcela'] ?></a></td>
                         <?php $total += $compra['valor_parcela']?>
 
                         <td> <?php if ($compra['pago'] == 'n') {
@@ -1020,12 +1020,12 @@ $_SESSION['total'] = 0;
               ?>
                     <tr>
                         <td><?= $compra['id'] ?></td>
-                        <td><?= $compra['historico'] ?></td>
+                        <td><a href="compra.editar.php?id=<?= $compra['id'] ?>"><?= $compra['historico'] ?></td></a></td>
                         <td>R$ <?= $compra['total'] ?></td>
                         <td><?= $compra['qtd_parcelas'] ?></td>
                         <td><?= $compra['parcela'] ?></td>
-                        <td><?= $compra['vencimento'] ?></td>
-                        <td>R$ <?= $compra['valor_parcela'] ?></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>"><?= $compra['vencimento'] ?></td></a></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>">R$ <?= $compra['valor_parcela'] ?></a></td>
                         <?php $total += $compra['valor_parcela']?>
 
                         <td> <?php if ($compra['pago'] == 'n') {
@@ -1135,12 +1135,12 @@ $_SESSION['total'] = 0;
               ?>
                     <tr>
                         <td><?= $compra['id'] ?></td>
-                        <td><?= $compra['historico'] ?></td>
+                        <td><a href="compra.editar.php?id=<?= $compra['id'] ?>"><?= $compra['historico'] ?></td></a></td>
                         <td>R$ <?= $compra['total'] ?></td>
                         <td><?= $compra['qtd_parcelas'] ?></td>
                         <td><?= $compra['parcela'] ?></td>
-                        <td><?= $compra['vencimento'] ?></td>
-                        <td>R$ <?= $compra['valor_parcela'] ?></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>"><?= $compra['vencimento'] ?></td></a></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>">R$ <?= $compra['valor_parcela'] ?></a></td>
                         <?php $total += $compra['valor_parcela']?>
 
                         <td> <?php if ($compra['pago'] == 'n') {
@@ -1250,12 +1250,12 @@ $_SESSION['total'] = 0;
               ?>
                     <tr>
                         <td><?= $compra['id'] ?></td>
-                        <td><?= $compra['historico'] ?></td>
+                        <td><a href="compra.editar.php?id=<?= $compra['id'] ?>"><?= $compra['historico'] ?></td></a></td>
                         <td>R$ <?= $compra['total'] ?></td>
                         <td><?= $compra['qtd_parcelas'] ?></td>
                         <td><?= $compra['parcela'] ?></td>
-                        <td><?= $compra['vencimento'] ?></td>
-                        <td>R$ <?= $compra['valor_parcela'] ?></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>"><?= $compra['vencimento'] ?></td></a></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>">R$ <?= $compra['valor_parcela'] ?></a></td>
                         <?php $total += $compra['valor_parcela']?>
 
                         <td> <?php if ($compra['pago'] == 'n') {
@@ -1365,12 +1365,12 @@ $_SESSION['total'] = 0;
               ?>
                     <tr>
                         <td><?= $compra['id'] ?></td>
-                        <td><?= $compra['historico'] ?></td>
+                        <td><a href="compra.editar.php?id=<?= $compra['id'] ?>"><?= $compra['historico'] ?></td></a></td>
                         <td>R$ <?= $compra['total'] ?></td>
                         <td><?= $compra['qtd_parcelas'] ?></td>
                         <td><?= $compra['parcela'] ?></td>
-                        <td><?= $compra['vencimento'] ?></td>
-                        <td>R$ <?= $compra['valor_parcela'] ?></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>"><?= $compra['vencimento'] ?></td></a></td>
+                        <td><a href="aPagarAtualizaValor.php?id=<?= $compra['id_parcela'] ?>">R$ <?= $compra['valor_parcela'] ?></a></td>
                         <?php $total += $compra['valor_parcela']?>
 
                         <td> <?php if ($compra['pago'] == 'n') {

@@ -1,13 +1,13 @@
 <?php
 
 include("DAO/conexao.php");
-include("DAO/operacoesDAO.php");
+include("DAO/financeiroDAO.php");
 include("header.php");
 ?>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Cadastrar nova compra</h1>
+                    <h1 class="page-header">Editar dados da compra</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -29,33 +29,37 @@ include("header.php");
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form action="compra.nova.cadastra.php" method="post" role="form">
-
+                                    <form action="compra.editar.altera.php" method="post" role="form">
+                                      <?php $array_compras = detalhaCompra($conexao, $_GET['id']);
+                                      foreach($array_compras as $compra) {
+                                      ?>
                                       <div class="form-group col-lg-12">
+                                        <input name="id" value="<?= $compra['id'] ?>" type="hidden">
+
                                         <label>Histórico</label>
-                                        <textarea class="form-control" rows="3"  name="historico"></textarea>
+                                        <textarea class="form-control" rows="3"  name="historico"><?= $compra['historico']?></textarea>
                                       </div>
                                       <div class="form-group col-lg-6">
                                         <label>Código NF</label>
-                                        <input name="codigo"  type="text" class="form-control">
+                                        <input name="codigo" value="<?= $compra['codigo_nf'] ?>" type="text" class="form-control">
                                       </div>
 
                                       <div class="form-group col-lg-6">
                                         <label>Data da compra</label>
-                                        <input name="data_compra" required type="date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
+                                        <input name="data_compra" required type="date" value="<?= date('Y-m-d', strtotime(str_replace('-','/', $compra['data_compra']))) ?>" class="form-control">
                                       </div>
                                       <div class="form-group col-lg-6">
                                         <label>Valor total da compra</label>
-                                        <input name="total" required type="number" step="0.01" class="form-control">
+                                        <input name="total" value="<?= $compra['total'] ?>" required type="number" step="0.01" class="form-control">
                                       </div>
                                       <div class="form-group col-lg-6">
                                         <label>Parcelamento</label>
-                                        <input name="parcelamento" required type="number" class="form-control">
+                                        <input name="parcelamento" required type="number" value="<?= $compra['qtd_parcelas'] ?>" class="form-control">
                                       </div>
-
+                                      <?php } ?>
 
                                         <div class="form-group col-lg-12">
-                                            <button type="submit" class="btn btn-success btn-sm">Cadastrar</button>
+                                            <button type="submit" class="btn btn-success btn-sm">Alterar</button>
                                         </div>
 
 

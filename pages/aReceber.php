@@ -18,245 +18,197 @@ $_SESSION['total'] = 0;
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header"><img width="40%" src="img/Marca%20sem%20fundo.png"></h1>
+                    <h1 class="page-header">Contas a Receber</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
 
-
-            <!--<div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Filtro
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <form action="aReceber.php" method="post" role="form">
-                                    <div class="col-lg-12">
-
-                                        <div class="form-group col-lg-6">
-                                           <label>Nome do Cliente</label>
-                                            <input name="nome" type="text" class="form-control">
-                                        </div>
-
-                                        <div class="form-group col-lg-6">
-                                           <label>Data Inicial</label>
-                                            <input name="dataInicial" required type="date" value="" class="form-control">
-                                        </div>
-
-                                        <div class="form-group col-lg-6">
-                                           <label>Data Final</label>
-                                            <input name="dataFinal" required type="date" value="" class="form-control">
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                           <label class="checkbox-inline">
-                                              <input name="cre" type="checkbox" value="credito">Crédito
-                                            </label>
-                                            <label class="checkbox-inline">
-                                              <input name="deb" type="checkbox" value="debito">Débito
-                                            </label>
-                                            <label class="checkbox-inline">
-                                              <input name="esp" type="checkbox" value="especie">Espécie
-                                            </label>
-                                            <label class="checkbox-inline">
-                                              <input name="che" type="checkbox" value="cheque">Cheque
-                                            </label>
-                                            <label class="checkbox-inline">
-                                              <input name="bol" type="checkbox" value="boleto">Boleto
-                                            </label>
-                                        </div>
-								        <div class="form-group col-lg-12">
-                                            <button type="submit" class="btn btn-default">Pesquisar</button>
-                                            <button type="reset" class="btn btn-default">Limpar</button>
-                                        </div>
-
-                                    </div>
-                                </form>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-
-
+            <?php if(array_key_exists("status", $_GET) && $_GET['status']=='pago'){?>
+                <div class="alert alert-success fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Confirmação de pagamento realizada com <strong>Successo!</strong>
+              </div>
+            <?php }  ?>
 
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Parcelas em aberto
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-12">
 
 
-                                    <table class="table table-striped">
-                                      <thead>
-                                          <tr>
-                                              <th>Venda</th>
-                                              <th>Data da venda</th>
-                                              <th>Cliente</th>
+<?php
+function alteraMes($i){
+  switch ($i) {
+    case 1:
+      return "Janeiro";
+      break;
+    case 2:
+      return "Fevereiro";
+      break;
+    case 3:
+      return "Março";
+      break;
+    case 4:
+      return "Abril";
+      break;
+    case 5:
+      return "Maio";
+      break;
+    case 6:
+      return "Junho";
+      break;
+    case 7:
+      return "Julho";
+      break;
+    case 8:
+      return "Agosto";
+      break;
+    case 9:
+      return "Setembro";
+      break;
+    case 10:
+      return "Outubro";
+      break;
+    case 11:
+      return "Novembro";
+      break;
+    case 12:
+      return "Dezembro";
+      break;
+  }
+}
 
-                                              <th>Forma pgto</th>
+ ?>
 
-                                              <th>Parcela</th>
-                                              <th>Vencimento</th>
-                                              <th>Valor da parcela</th>
-                                              <th>Recebido</th>
-                                              <th></th>
+<div class="col-md-12">
+<?php for ($i=1; $i < 13; $i++) {?>
 
-                                          </tr>
-                                       </thead>
+<div class="panel-group" id="accordion1">
 
-                                <?php
-                                        $total=0;
-                $array_vendas = buscaContasAReceber($conexao);
-                foreach($array_vendas as $venda) {
-                ?>
-                                        <tr>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion<?=$i?>" href="#collapse<?=$i?>"><?php echo alteraMes($i) ?></a>
+        </h4>
+      </div>
+      <div id="collapse<?=$i?>" class="panel-collapse collapse in">
 
-                                            <td><?= $venda['id_venda'] ?></td>
-                                            <td><?= $venda['data_venda'] ?></td>
-                                            <td><?= $venda['nome_cliente'] ?></td>
-
-                                            <td><?= $venda['forma_pgto'] ?></td>
-
-                                            <td><?= $venda['parcela'] ?></td>
-                                            <td><?= $venda['vencimento'] ?></td>
-                                            <td>R$ <?= $venda['valor_parcela'] ?></td>
-                                            <td><?= $venda['recebido'] ?></td>
-
-                                            <td><a href="aReceber-confirma.php?id=<?= $venda['id_parcela'] ?>"> Informar recebimento <i class="fa fa-check" aria-hidden="true"></i></a> </td>
-                                            <?php $total += $venda['valor_parcela']?>
-
-
-                                        </tr>
-
-                                        <!-- Fim do for -->
-                                        <?php } ?>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-
-                                            <td></td>
-                                            <td></td>
-                                            <td align="right">Total a receber:</td>
-                                            <td>R$ <?=$total?></td>
-                                            <td></td>
-                                        </tr>
-
-            </table>
-                               <button class="btn btn-default" onclick="imprime()">Imprimir</button>
-
-
-                                 </div>
+          <div class="panel-body">
+            <div class="col-lg-12">
 
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <table class="table table-striped">
+                  <thead>
+                      <tr>
+                          <th>Venda</th>
+                          <th>Data venda</th>
+                          <th>Cliente</th>
+                          <th>Parcela</th>
+                          <th>Vencimento</th>
+                          <th>Valor</th>
+                          <th>Meio pgto</th>
+                          <th>Recebido</th>
 
+                      </tr>
+                   </thead>
 
+            <?php
+                    $total=0;
+                    $totalAberto=0;
+                    $totalRecebido=0;
+              $array_contas = buscaContasAReceberPorMes($conexao, $i);
+              foreach($array_contas as $conta) {
+              ?>
+                    <tr>
+                        <td><?= $conta['id_venda'] ?></td>
+                        <td><?= $conta['data_venda'] ?></td>
+                        <td><?= $conta['nome_cliente'] ?></td>
 
+                        <td><?= $conta['parcela'] ?></td>
+                        <td><a href="aReceberAtualizaValor.php?id=<?= $conta['id_parcela'] ?>"><?= $conta['vencimento'] ?></a></td>
+                        <td><a href="aReceberAtualizaValor.php?id=<?= $conta['id_parcela'] ?>">R$ <?= $conta['valor_parcela'] ?></a></td>
+                        <?php $total += $conta['valor_parcela']?>
+                        <td><?= $conta['forma_pgto'] ?></td>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Parcelas recebidas
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-lg-12">
+                        <td> <?php if ($conta['recebido'] == 'n') {
+                          echo 'Não';
+                        } else {
+                          echo 'Sim';
+                        }
+                         ?>
+                       </td>
+                        <td> <?php if ($conta['recebido'] == 'n') {
+                          echo '<a href="aReceber-confirma.php?id='.$conta['id_parcela']. ' "> Informar recebimento <i class="fa fa-check" aria-hidden="true"></i></a>';
+                        } else {
+                          echo '<a href="aReceber-desfaz.php?id='.$conta['id_parcela']. ' "> Desfazer <i class="fa fa-undo" aria-hidden="true"></i></a>';                                                }
+                         ?>
+                       </td>
+                       <?php if ($conta['recebido'] == 'n') {
+                         $totalAberto+=$conta['valor_parcela'];
+                       } else {
+                         $totalRecebido+=$conta['valor_parcela'];
+                       }
+                        ?>
 
+                    </tr>
 
-                                        <table class="table table-striped">
-                                          <thead>
-                                              <tr>
-                                                  <th>Venda</th>
-                                                  <th>Data da venda</th>
-                                                  <th>Cliente</th>
+                    <!-- Fim do for -->
+                    <?php } ?>
 
-                                                  <th>Forma de Pagamento</th>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total do mês:</td>
+                        <td>R$ <?=$total?></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
 
-                                                  <th>Parcela</th>
-                                                  <th>Vencimento</th>
-                                                  <th>Valor da parcela</th>
-                                                  <th>Recebido</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total recebido:</td>
+                        <td>R$ <?=$totalRecebido?></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
 
-                                                  <th></th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">Total em aberto:</td>
+                        <td>R$ <?=$totalAberto?></td>
+                        <td></td>
+                        <td></td>
 
-                                              </tr>
-                                           </thead>
+                        <td></td>
+                    </tr>
 
-                                    <?php
-                                            $total=0;
-                    $array_vendas = buscaContasARecebidas($conexao);
-                    foreach($array_vendas as $venda) {
-                    ?>
-                                            <tr>
+                  </table>
+             </div>
+          </div>
 
-                                                <td><?= $venda['id_venda'] ?></td>
-                                                <td><?= $venda['data_venda'] ?></td>
-                                                <td><?= $venda['nome_cliente'] ?></td>
+      </div>
+    </div>
 
-                                                <td><?= $venda['forma_pgto'] ?></td>
-
-                                                <td><?= $venda['parcela'] ?></td>
-                                                <td><?= $venda['vencimento'] ?></td>
-                                                <td>R$ <?= $venda['valor_parcela'] ?></td>
-                                                <td><?= $venda['recebido'] ?></td>
-
-                                                <td><a href="aReceber-desfaz.php?id=<?= $venda['id_parcela'] ?>">Desfazer <i class="fa fa-undo" aria-hidden="true"></i></a> </td>
-                                                <?php $total += $venda['valor_parcela']?>
-
-
-                                            </tr>
-
-                                            <!-- Fim do for -->
-                                            <?php } ?>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-
-                                                <td></td>
-                                                <td></td>
-                                                <td align="right">Total:</td>
-                                                <td>R$ <?=$total?></td>
-                                                <td></td>
-                                            </tr>
-
-                </table>
-                                   <button class="btn btn-default" onclick="imprime()">Imprimir</button>
-
-
-                                     </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-            </div>
 </div>
+<?php } ?>
 
 
+<button class="btn btn-default" onclick="imprime()">Imprimir</button>
+<br><br>
 
-
+  <!-- div 12 colunas -->
+</div>
+    </div>
+</div>
+</div>
         </div>
 
          <script>

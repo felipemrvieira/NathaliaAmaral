@@ -32,6 +32,33 @@ function listaCompras($conexao){
     return $array_compras;
 }
 
+function detalhaCompra($conexao, $id){
+    $array_compras = array();
+    $resultado = mysqli_query($conexao, "select
+    id, historico, codigo_nf, data_compra, total, qtd_parcelas
+    from compra
+    where id = '{$id}'; ");
+    while($compra = mysqli_fetch_assoc($resultado)){
+        array_push($array_compras, $compra);
+    }
+    return $array_compras;
+}
+
+function editarCompra($conexao, $compra){
+
+    echo $query = "UPDATE compra SET
+    historico = '{$compra['historico']}',
+    codigo_nf = '{$compra['codigo']}',
+    data_compra = '{$compra['data_compra']}',
+    total = '{$compra['total']}',
+    qtd_parcelas = '{$compra['parcelamento']}'
+
+    WHERE id = '{$compra['id']}' ";
+    $resultado = mysqli_query($conexao, $query);
+
+    return mysqli_insert_id($conexao);
+}
+
 function listaComprasEParcelas($conexao){
     $array_compras = array();
     $resultado = mysqli_query($conexao, "select c.id, c.historico, DATE_FORMAT(c.data_compra,'%d/%m/%Y') as data_compra,  c.total, c.qtd_parcelas,
@@ -98,6 +125,8 @@ function listaContasAReceber($conexao){
     }
     return $array_vendas;
 }
+
+
 
 function buscaVendas($dataInicial, $dataFinal, $conexao){
     $array_vendas = array();
@@ -184,6 +213,61 @@ order by car.id_venda, vencimento, id");
         array_push($array_vendas, $venda);
     }
     return $array_vendas;
+}
+
+function buscaContasAReceberPorMes($conexao, $mes){
+  $array_vendas = array();
+  $resultado = mysqli_query($conexao, "select car.id as id_parcela, c.nome_cliente, car.id_venda, car.recebido, v.id_venda,
+  fp.forma_pgto, DATE_FORMAT(v.data_venda,'%d/%m/%Y') as data_venda, car.parcela, car.valor_parcela, DATE_FORMAT(car.vencimento,'%d/%m/%Y') as vencimento
+
+  from contas_a_receber car
+  join venda v on (car.id_venda = v.id_venda)
+  join cliente c on (v.id_cliente = c.id_cliente)
+  join forma_pagamento fp on (fp.id_venda = v.id_venda)
+
+  where month(car.vencimento) = '{$mes}'
+
+  order by car.id_venda, vencimento, id");
+
+  while($venda = mysqli_fetch_assoc($resultado)){
+    array_push($array_vendas, $venda);
+  }
+  return $array_vendas;
+}
+
+function detalhaContaAReceber($conexao, $id){
+  $array_vendas = array();
+  $resultado = mysqli_query($conexao, "select car.id as id_parcela, c.nome_cliente, car.id_venda, car.recebido, v.id_venda,
+  fp.forma_pgto, DATE_FORMAT(v.data_venda,'%d/%m/%Y') as data_venda, car.parcela, car.valor_parcela, car.vencimento as vencimento
+
+  from contas_a_receber car
+  join venda v on (car.id_venda = v.id_venda)
+  join cliente c on (v.id_cliente = c.id_cliente)
+  join forma_pagamento fp on (fp.id_venda = v.id_venda)
+
+  where car.id = '{$id}'
+
+  order by car.id_venda, vencimento, id");
+
+  while($venda = mysqli_fetch_assoc($resultado)){
+    array_push($array_vendas, $venda);
+  }
+  return $array_vendas;
+}
+
+function detalhaContaAPagar($conexao, $id){
+  $array_compras = array();
+  $resultado = mysqli_query($conexao, "select c.id, c.historico, DATE_FORMAT(c.data_compra,'%d/%m/%Y') as data_compra,  c.total, c.qtd_parcelas,
+                              cap.id as id_parcela, cap.parcela, cap.vencimento as vencimento, cap.valor_parcela, cap.pago
+                              from compra c
+                              join contas_a_pagar cap on (c.id = cap.id_compra)
+                              where cap.id = '{$id}'
+                              order by  c.id, cap.parcela;");
+
+  while($compra = mysqli_fetch_assoc($resultado)){
+    array_push($array_compras, $compra);
+  }
+  return $array_compras;
 }
 
 function buscaContasAReceberCliente($conexao, $nome){
@@ -324,6 +408,23 @@ function desfazPagamento($conexao, $id_parcela){
      echo $sql = "UPDATE contas_a_pagar
                 SET pago='n'
                 WHERE  id='{$id_parcela}'";
+    $resultado = mysqli_query($conexao, $sql);
+    return $resultado;
+}
+
+function aReceberAlteraVencimento($conexao, $parcela){
+     echo $sql = "UPDATE contas_a_receber
+                SET valor_parcela='{$parcela["valor_parcela"]}',
+                vencimento='{$parcela["vencimento_parcela"]}'
+                WHERE  id='{$parcela["id_parcela"]}'";
+    $resultado = mysqli_query($conexao, $sql);
+    return $resultado;
+}
+function aPagarAlteraVencimento($conexao, $parcela){
+     echo $sql = "UPDATE contas_a_pagar
+                SET valor_parcela='{$parcela["valor_parcela"]}',
+                vencimento='{$parcela["vencimento_parcela"]}'
+                WHERE  id='{$parcela["id_parcela"]}'";
     $resultado = mysqli_query($conexao, $sql);
     return $resultado;
 }

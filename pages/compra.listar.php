@@ -99,7 +99,7 @@ $_SESSION['total'] = 0;
                                           <tr>
                                               <th>Id da compra</th>
                                               <th>Histórico</th>
-                                              <th>Código NF</th>                                              
+                                              <th>Código NF</th>
                                               <th>Data da compra</th>
                                               <th>Total da compra</th>
                                               <th>Parcelas</th>
@@ -114,10 +114,10 @@ $_SESSION['total'] = 0;
                 ?>
                                         <tr>
                                             <td><?= $compra['id'] ?></td>
-                                            <td><?= $compra['historico'] ?></td>
+                                            <td><a href="compra.editar.php?id=<?= $compra['id'] ?>"><?= $compra['historico'] ?></td></a></td>
                                             <td><?= $compra['codigo_nf'] ?></td>
                                             <td><?= $compra['data_compra'] ?></td>
-                                            <td><?= $compra['total'] ?></td>
+                                            <td>R$ <?= $compra['total'] ?></td>
                                             <td><?= $compra['qtd_parcelas'] ?></td>
                                         </tr>
 
