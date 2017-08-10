@@ -54,12 +54,13 @@ include("header.php");
                                       </div>
                                       <div class="form-group col-lg-6">
                                         <label>Parcelamento</label>
-                                        <input name="parcelamento" required type="number" value="<?= $compra['qtd_parcelas'] ?>" class="form-control">
+                                        <input name="parcelamento" required disabled type="number" value="<?= $compra['qtd_parcelas'] ?>" class="form-control">
                                       </div>
                                       <?php } ?>
 
                                         <div class="form-group col-lg-12">
-                                            <button type="submit" class="btn btn-success btn-sm">Alterar</button>
+                                            <button type="submit" class="btn btn-success ">Alterar</button>
+                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" name="button">Excluir</button>
                                         </div>
 
 
@@ -71,6 +72,33 @@ include("header.php");
                 </div>
             </div>
 </div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Atenção</h4>
+      </div>
+      <div class="modal-body">
+        <p>Ao excluir uma compra, as parcelas também são excluidas!</p>
+        <div class="">
+          <form class="" action="compra.exclui.php" method="post">
+            <input name="id" value="<?= $compra['id'] ?>" type="hidden">
+            <button type="submit" class="btn btn-danger ">Excluir</button>
+          </form>
+        </div>
+        <p></p>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
 
 
     <!--/div>

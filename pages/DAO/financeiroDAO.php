@@ -126,6 +126,10 @@ function listaContasAReceber($conexao){
     return $array_vendas;
 }
 
+function excluirCompraEParcelas($conexao, $id){
+  $resultado = mysqli_query($conexao, "DELETE FROM compra WHERE id = '{$id}'");
+  $resultado2 = mysqli_query($conexao, "DELETE FROM contas_a_pagar WHERE id_compra = '{$id}'");
+}
 
 
 function buscaVendas($dataInicial, $dataFinal, $conexao){

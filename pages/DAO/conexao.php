@@ -1,7 +1,7 @@
 <?php
 
 //Local
- $conexao = mysqli_connect("localhost", "root", "v131r4@1", "nathaliaamaral");
+  $conexao = mysqli_connect("localhost", "root", "v131r4@1", "nathaliaamaral");
 
 
 //Produção
