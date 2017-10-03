@@ -25,7 +25,7 @@ function listaCompras($conexao){
     $resultado = mysqli_query($conexao, "select
     id, historico, codigo_nf, DATE_FORMAT(data_compra,'%d/%m/%Y') as data_compra,
     total, qtd_parcelas
-    from compra");
+    from compra ORDER BY id desc");
     while($compra = mysqli_fetch_assoc($resultado)){
         array_push($array_compras, $compra);
     }
@@ -71,13 +71,13 @@ function listaComprasEParcelas($conexao){
     }
     return $array_compras;
 }
-function listaComprasEParcelasPorMes($conexao, $mes){
+function listaComprasEParcelasPorMes($conexao, $mes, $ano){
     $array_compras = array();
     $sql = "select c.id, c.historico, DATE_FORMAT(c.data_compra,'%d/%m/%Y') as data_compra,  c.total, c.qtd_parcelas,
                               cap.id as id_parcela, cap.parcela, DATE_FORMAT(cap.vencimento,'%d/%m/%Y') as vencimento, cap.valor_parcela, cap.pago
                               from compra c
                               join contas_a_pagar cap on (c.id = cap.id_compra)
-                              where month(cap.vencimento) = '{$mes}'
+                              where month(cap.vencimento) = '{$mes}' and year(cap.vencimento) = '{$ano}'
                               order by  c.id, cap.parcela;";
     $resultado = mysqli_query($conexao, $sql);
     while($compra = mysqli_fetch_assoc($resultado)){
@@ -129,6 +129,14 @@ function listaContasAReceber($conexao){
 function excluirCompraEParcelas($conexao, $id){
   $resultado = mysqli_query($conexao, "DELETE FROM compra WHERE id = '{$id}'");
   $resultado2 = mysqli_query($conexao, "DELETE FROM contas_a_pagar WHERE id_compra = '{$id}'");
+}
+
+function excluirParcela($conexao, $id){
+  $resultado = mysqli_query($conexao, "DELETE FROM contas_a_pagar WHERE id = '{$id}'");
+}
+
+function excluirParcelaAReceber($conexao, $id){
+  $resultado = mysqli_query($conexao, "DELETE FROM contas_a_receber WHERE id = '{$id}'");
 }
 
 
@@ -199,6 +207,29 @@ function buscaVendasCliente($debito, $credito, $boleto, $cheque, $especie,$nome,
     return $array_vendas;
 }
 
+function listaClientesEContratos($debito, $credito, $boleto, $cheque, $especie, $conexao){
+    $array_vendas = array();
+    $sql = "select
+                  v.id_venda, v.id_cliente, c.nome_cliente, s.nome_servico, v.total, f.forma_pgto,
+                  f.qtd_parcelas, DATE_FORMAT(v.data_venda,'%d/%m/%Y') as data_venda
+
+                  from venda v
+                  join cliente c
+                  on (v.id_cliente = c.id_cliente)
+
+                  join forma_pagamento f on (v.id_venda = f.id_venda) and
+                  (f.forma_pgto = '{$debito}' or f.forma_pgto = '{$credito}' or f.forma_pgto = '{$boleto}' or f.forma_pgto = '{$cheque}' or f.forma_pgto = '{$especie}')
+                  join itens_venda iv on (v.id_venda = iv.id_venda)
+                  join servico s on (iv.id_prod_serv = s.id_prod_serv)
+                  order by v.id_venda";
+    $resultado = mysqli_query($conexao, $sql);
+
+    while($venda = mysqli_fetch_assoc($resultado)){
+        array_push($array_vendas, $venda);
+    }
+    return $array_vendas;
+}
+
 function buscaContasAReceber($conexao){
     $array_vendas = array();
     $resultado = mysqli_query($conexao, "select car.id as id_parcela, c.nome_cliente, car.id_venda, car.recebido, v.id_venda,
@@ -219,7 +250,7 @@ order by car.id_venda, vencimento, id");
     return $array_vendas;
 }
 
-function buscaContasAReceberPorMes($conexao, $mes){
+function buscaContasAReceberPorMes($conexao, $mes, $ano){
   $array_vendas = array();
   $resultado = mysqli_query($conexao, "select car.id as id_parcela, c.nome_cliente, car.id_venda, car.recebido, v.id_venda,
   fp.forma_pgto, DATE_FORMAT(v.data_venda,'%d/%m/%Y') as data_venda, car.parcela, car.valor_parcela, DATE_FORMAT(car.vencimento,'%d/%m/%Y') as vencimento
@@ -229,7 +260,7 @@ function buscaContasAReceberPorMes($conexao, $mes){
   join cliente c on (v.id_cliente = c.id_cliente)
   join forma_pagamento fp on (fp.id_venda = v.id_venda)
 
-  where month(car.vencimento) = '{$mes}'
+  where month(car.vencimento) = '{$mes}' and year(car.vencimento) = '{$ano}'
 
   order by car.id_venda, vencimento, id");
 

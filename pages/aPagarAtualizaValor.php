@@ -53,7 +53,7 @@ include("DAO/financeiroDAO.php");
 
 
                                   <tr>
-                                    <input type="hidden" class="form-control"  name="id_parcela" value=" <?= $_GET['id']?> ">
+                                    <input type="hidden" class="form-control"  name="id_parcela" value="<?= $_GET['id']?> ">
                                     <td><?= $compra['id'] ?></td>
                                     <td><?= $compra['historico'] ?></td>
                                     <td>R$ <?= $compra['total'] ?></td>
@@ -75,8 +75,9 @@ include("DAO/financeiroDAO.php");
 
                                         <?php } ?>
 
-                                    <div class="col-lg-12">
-                                        <button type="submit" class="btn btn-success btn-sm">Salvar</button>
+                                    <div class="">
+                                        <button type="submit" class="btn btn-success">Salvar</button>
+                                        <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#myModal" name="button">Excluir Parcela</button>
                                     </div>
                                     </form>
 
@@ -86,6 +87,32 @@ include("DAO/financeiroDAO.php");
                     </div></div>
             </div>
 
+
+            <!-- Modal -->
+            <div id="myModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Atenção</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Você está excluindo apenas a parcela, ainda ficam registrada a compra e as eventuais parcelas restantes.</p>
+                    <div class="">
+                      <form class="" action="compra.exclui.parcela.php" method="post">
+                        <input name="id" value="<?= $_GET['id']?>" type="hidden">
+                        <button type="submit" class="btn btn-danger ">Excluir Parcela</button>
+                      </form>
+                    </div>
+                    <p></p>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
 
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>

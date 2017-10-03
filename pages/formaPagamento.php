@@ -1,9 +1,9 @@
 <?php
-    include("DAO/conexao.php");
-    include("DAO/estoqueDAO.php");
-    include("DAO/operacoesDAO.php");
+  include("DAO/conexao.php");
+  include("DAO/estoqueDAO.php");
+  include("DAO/operacoesDAO.php");
+  include('header.php');
 
-include('header.php');
 ?>
 
         <div id="page-wrapper">
@@ -21,37 +21,34 @@ include('header.php');
                             Forma de pagamento e Entrega
                         </div>
                         <div class="panel-body">
-                        
+
                             <div class="row">
                                 <div class="col-lg-6">
-                                    
-                                    
+
+
                                     <form role="form" action="venda/finalizaVenda.php" method="post">
-                                        <div class="form-group" >                                    
+                                        <div class="form-group" >
                                             <br>
                                             <label for="produtos">Selecione a forma de pagamento</label>
                                             <select class="form-control" id="produtos" name="formaPagamento">
-                                                
-                                                <option value="credito">Cartão - Crédito</option>
-                                                <option value="debito">Cartão - Débito</option>
-                                                <option value="especie">Espécie</option>
-                                                <option value="boleto">Boleto</option>
-                                                <option value="cheque">Cheque</option>
-                                                <option value="transferencia">Transferência bancária</option>
-                                        
-
+                                              <option value="credito">Cartão - Crédito</option>
+                                              <option value="debito">Cartão - Débito</option>
+                                              <option value="especie">Espécie</option>
+                                              <option value="boleto">Boleto</option>
+                                              <option value="cheque">Cheque</option>
+                                              <option value="transferencia">Transferência bancária</option>
                                             </select>
                                         </div>
-                                        
+
                                         <div class="form-group">
                                             <label> Parcelas: </label>
                                             <input type="number"  min="1" max="12" step="1" name="parcelas" class="form-control" required placeholder="Quantidade">
-                                        </div> 
-                                        
-                                        
-                                        
-                                        
-                                        
+                                        </div>
+
+
+
+
+
                                            <hr>
                                             <div class="form-group">
                                            <label> Data de entega:</label>
@@ -67,12 +64,12 @@ include('header.php');
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
-                                      
-                                            
-                                        
+
+
+
                                             <div class="form-group">
                                                 <label>Produto entregue?</label>
                                                 <label class="radio-inline">
@@ -82,19 +79,19 @@ include('header.php');
                                                    <input type="radio" name="entregue" id="nao" value="nao" checked>Não
                                                 </label>
                                             </div>
-                                        
-                                            
-                                        
-                                       
-                                                                               
+
+
+
+
+
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-default btn-block">Selecionar</button>
                                         </div>
 										</form>
-                                   
+
                                  </div>
-                                    
-                                    
+
+
                                 </div>
                             </div>
                         </div>
@@ -103,11 +100,11 @@ include('header.php');
             </div>
 </div>
 
-            
-            
-            
+
+
+
         </div>
-         
+
     <!--/div>
     <!-- /#wrapper -->
 

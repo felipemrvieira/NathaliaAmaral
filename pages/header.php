@@ -106,7 +106,6 @@ validaUsuarioLogado();
 
 <body >
 
-    <div id="wrapper">
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -408,6 +407,10 @@ validaUsuarioLogado();
                                  <li>
                                     <a href="aniversariantes.php">Aniversariantes</a>
                                 </li>
+                                <li>
+                                  <a href="cliente.lista.contratos.php">Lista Clientes</a>
+                                </li>
+
 
                             </ul>
                             <!-- /.nav-second-level -->

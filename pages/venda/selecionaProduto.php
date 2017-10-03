@@ -9,24 +9,26 @@ if(isset($_SESSION["indice"]) !== true){
         $_SESSION["cesta"][$_SESSION["indice"]]['nome'] = extraiNome($_POST['produto']);
         $_SESSION["cesta"][$_SESSION["indice"]]['id_prod_serv'] = extraiId($_POST['produto']);
         $_SESSION["cesta"][$_SESSION["indice"]]['qtd'] = $_POST['qtd'];
+        $_SESSION['data_venda'] = $_POST['data_venda'];
         $_SESSION["cesta"][$_SESSION["indice"]]['valor'] = extraiValor($_POST['produto']);
-        $_SESSION["cesta"][$_SESSION["indice"]]['totalItem'] = $_SESSION["cesta"][$_SESSION["indice"]]['qtd'] * 
+        $_SESSION["cesta"][$_SESSION["indice"]]['totalItem'] = $_SESSION["cesta"][$_SESSION["indice"]]['qtd'] *
             $_SESSION["cesta"][$_SESSION["indice"]]['valor'];
-        
+
         echo 'produto '.$_SESSION["indice"].' adicionado';
     }
-   
-    
+
+
 }else{
     if(isset($_POST['produto']) == true){
         $_SESSION["indice"] += 1;
         $_SESSION["cesta"][$_SESSION["indice"]]['nome'] = extraiNome($_POST['produto']);
         $_SESSION["cesta"][$_SESSION["indice"]]['id_prod_serv'] = extraiId($_POST['produto']);
         $_SESSION["cesta"][$_SESSION["indice"]]['qtd'] = $_POST['qtd'];
+        $_SESSION['data_venda'] = $_POST['data_venda'];
         $_SESSION["cesta"][$_SESSION["indice"]]['valor'] = extraiValor($_POST['produto']);
-        $_SESSION["cesta"][$_SESSION["indice"]]['totalItem'] = $_SESSION["cesta"][$_SESSION["indice"]]['qtd'] * 
+        $_SESSION["cesta"][$_SESSION["indice"]]['totalItem'] = $_SESSION["cesta"][$_SESSION["indice"]]['qtd'] *
             $_SESSION["cesta"][$_SESSION["indice"]]['valor'];
-        
+
         echo 'produto '.$_SESSION["indice"].' adicionado';
     }
 }
@@ -56,6 +58,6 @@ echo sizeof($_SESSION['cesta']);
 
 //limpaCarrinho();
 
-    
+
 header("location: ../selecionarProduto.php");
 die();

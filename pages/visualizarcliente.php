@@ -6,9 +6,7 @@
   include("DAO/financeiroDAO.php");
 
   if(true){
-      if(isset($_POST['nome'])){
-          $nome = $_POST['nome'];
-      }
+      
 
       if(isset($_POST['bol'])){
           $boleto = $_POST['bol'];

@@ -20,6 +20,16 @@ unset ($_SESSION['editaCesta']);
 
 
                                     <form role="form" name="formvenda" action="venda/selecionaProduto.php" method="post">
+                                      <div class="form-group col-md-7">
+                                        <label>Data da Venda</label>
+                                          <div class='input-group date' id='datetimepicker2'>
+                                              <input type='date' class="form-control" name="data_venda" value="<?=$_SESSION['data_venda']?>"/>
+
+                                              <span class="input-group-addon">
+                                                  <span class="glyphicon glyphicon-calendar"></span>
+                                              </span>
+                                          </div>
+                                      </div>
                                         <div class="form-group col-md-9" >
                                             <label for="produtos">Selecione um Serviço</label>
                                             <select class="form-control " id="produtos" name="produto">
@@ -41,12 +51,8 @@ unset ($_SESSION['editaCesta']);
                                                 $array_servicos = listaservico($conexao);
                                                 foreach($array_servicos as $servico) {
                                                 ?>
-                                                    <option value="<?=$servico['nome_servico']?>|<?=$servico['valor_servico']?>/<?=$servico['id_servico']?>">
-                                                        <?= $servico['id_servico'] ?> - <?=$servico['nome_servico'] ?> - R$ <?= $servico['valor_servico'] ?></option >
-
-
-
-
+                                                  <option value="<?=$servico['nome_servico']?>|<?=$servico['valor_servico']?>/<?=$servico['id_servico']?>">
+                                                  <?= $servico['id_servico'] ?> - <?=$servico['nome_servico'] ?> - R$ <?= $servico['valor_servico'] ?></option >
                                                 <?php
                                                 }
                                                 ?>
@@ -56,15 +62,19 @@ unset ($_SESSION['editaCesta']);
                                             </select>
                                         </div>
                                         <div class="form-group col-md-3">
-                                          <label> Quantidade: </label>
+                                          <label>Quantidade: </label>
                                           <input type="number"  min="1" step="1" name="qtd" class="form-control" required value="1">
                                         </div>
-
-
-
                                         <div class=" form-group col-md-12">
                                           <a class="" data-toggle="modal" data-target="#servicoModal">Cadastrar novo serviço</a>
                                         </div>
+
+
+
+
+
+
+
 
                                         <div class="form-group col-md-12">
                                             <button type="submit" class="btn btn-default btn-block">Adicionar</button>

@@ -54,15 +54,18 @@ include("DAO/financeiroDAO.php");
 
                                   <tr>
                                     <input type="hidden" class="form-control"  name="id_parcela" value=" <?= $_GET['id']?> ">
+                                    <input type="hidden" name="mes" value=" <?= $_GET['mes']?> ">
                                       <td><?= $conta['id_venda'] ?></td>
                                       <td><?= $conta['data_venda'] ?></td>
                                       <td><?= $conta['nome_cliente'] ?></td>
 
                                       <td><?= $conta['parcela'] ?></td>
-                                      <td><input type='date' value="<?= $conta['vencimento'] ?>" class="form-control" name="vencimento_parcela"></td>
+                                      <td><input type='date' value="<?= $conta['vencimento'] ?>"
+                                        class="form-control" name="vencimento_parcela"></td>
 
                                       </div>
-                                      <td> <input class="form-control" type="number" step="0.01" name="valor_parcela" value="<?= $conta['valor_parcela'] ?>"> </td>
+                                      <td> <input class="form-control" type="number" step="0.01"
+                                        name="valor_parcela" value="<?= $conta['valor_parcela'] ?>"> </td>
                                       <td><?= $conta['forma_pgto'] ?></td>
 
                                       <td> <?php if ($conta['recebido'] == 'n') {
@@ -79,8 +82,9 @@ include("DAO/financeiroDAO.php");
 
                                         <?php } ?>
 
-                                    <div class="col-lg-12">
-                                        <button type="submit" class="btn btn-success btn-sm">Salvar</button>
+                                    <div class="">
+                                        <button type="submit" class="btn btn-success">Salvar</button>
+                                        <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#myModal" name="button">Excluir Parcela</button>
                                     </div>
                                     </form>
 
@@ -88,6 +92,33 @@ include("DAO/financeiroDAO.php");
                             </div>
                         </div>
                     </div></div>
+            </div>
+
+            <!-- Modal -->
+            <div id="myModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Atenção</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Tem certeza que deseja excluir?</p>
+                    <div class="">
+                      <form class="" action="aReceber.exclui.parcela.php" method="post">
+                        <input name="id" value="<?= $_GET['id']?>" type="hidden">
+                        <input type="hidden" name="mes" value=" <?= $_GET['mes']?> ">
+                        <button type="submit" class="btn btn-danger ">Excluir Parcela</button>
+                      </form>
+                    </div>
+                    <p></p>
+                  </div>
+
+                </div>
+
+              </div>
             </div>
 
 

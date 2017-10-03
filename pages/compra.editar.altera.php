@@ -15,5 +15,5 @@ $compra['parcelamento'] = $_POST['parcelamento'];
 $_SESSION['totalCompra'] = $compra['total'];
 editarCompra($conexao, $compra);
 
-header("location: aPagar.php");
+header("location: compra.listar.php");
 die();

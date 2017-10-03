@@ -19,9 +19,10 @@ die();
 
 
 function limpaCesta(){
-    unset($_SESSION['nome_cliente']);
-    unset($_SESSION['id_cliente']);
-    unset($_SESSION['indice']);
-    unset($_SESSION['cesta']);
-    unset($_SESSION['totalCesta']);    
+  unset($_SESSION['nome_cliente']);
+  unset($_SESSION['id_cliente']);
+  unset($_SESSION['indice']);
+  unset($_SESSION['cesta']);
+  unset($_SESSION['totalCesta']);
+  unset($_SESSION['data_venda']);
 }

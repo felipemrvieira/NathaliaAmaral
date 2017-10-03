@@ -21,6 +21,9 @@ $_SESSION['total'] = 0;
                     <h1 class="page-header">Contas a Receber</h1>
                 </div>
                 <!-- /.col-lg-12 -->
+                <div class="col-lg-12">
+                    <a href="aReceber.php?ano=2017">2017</a> / <a href="aReceber.php?ano=2018">2018</a>
+                </div>
             </div>
             <!-- /.row -->
 
@@ -81,19 +84,20 @@ function alteraMes($i){
 <div class="col-md-12">
 <?php for ($i=1; $i < 13; $i++) {?>
 
-<div class="panel-group" id="accordion1">
+<div class="panel-group" id="mes<?=$i?>">
 
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion<?=$i?>" href="#collapse<?=$i?>"><?php echo alteraMes($i) ?></a>
+          <a data-toggle="collapse" data-parent="#mes<?=$i?>" href="#collapse<?=$i?>">
+            <?php echo alteraMes($i) ?>
+          </a>
         </h4>
       </div>
       <div id="collapse<?=$i?>" class="panel-collapse collapse in">
 
           <div class="panel-body">
             <div class="col-lg-12">
-
 
                 <table class="table table-striped">
                   <thead>
@@ -106,7 +110,6 @@ function alteraMes($i){
                           <th>Valor</th>
                           <th>Meio pgto</th>
                           <th>Recebido</th>
-
                       </tr>
                    </thead>
 
@@ -114,17 +117,24 @@ function alteraMes($i){
                     $total=0;
                     $totalAberto=0;
                     $totalRecebido=0;
-              $array_contas = buscaContasAReceberPorMes($conexao, $i);
-              foreach($array_contas as $conta) {
-              ?>
+                    if(array_key_exists("ano", $_GET) && $_GET['ano']=='2018'){
+                      $ano = 2018;
+                    }else {
+                      $ano = 2017;
+                    }
+
+                    $array_contas = buscaContasAReceberPorMes($conexao, $i, $ano);
+                    foreach($array_contas as $conta) {
+                    ?>
                     <tr>
+                      <form method="post">
                         <td><?= $conta['id_venda'] ?></td>
                         <td><?= $conta['data_venda'] ?></td>
                         <td><?= $conta['nome_cliente'] ?></td>
 
                         <td><?= $conta['parcela'] ?></td>
-                        <td><a href="aReceberAtualizaValor.php?id=<?= $conta['id_parcela'] ?>"><?= $conta['vencimento'] ?></a></td>
-                        <td><a href="aReceberAtualizaValor.php?id=<?= $conta['id_parcela'] ?>">R$ <?= $conta['valor_parcela'] ?></a></td>
+                        <td><a href="aReceberAtualizaValor.php?id=<?= $conta['id_parcela'] ?>&mes=<?=$i?>"><?= $conta['vencimento'] ?></a></td>
+                        <td><a href="aReceberAtualizaValor.php?id=<?= $conta['id_parcela'] ?>&mes=<?=$i?>">R$ <?= $conta['valor_parcela'] ?></a></td>
                         <?php $total += $conta['valor_parcela']?>
                         <td><?= $conta['forma_pgto'] ?></td>
 
@@ -135,10 +145,27 @@ function alteraMes($i){
                         }
                          ?>
                        </td>
+
+
+
                         <td> <?php if ($conta['recebido'] == 'n') {
-                          echo '<a href="aReceber-confirma.php?id='.$conta['id_parcela']. ' "> Informar recebimento <i class="fa fa-check" aria-hidden="true"></i></a>';
+                          $caminhoConfirmacao = "aReceber-confirma.php?id=".$conta['id_parcela']."&mes=mes".$i;
+                          echo '<button type="submit"
+                                 formaction='.$caminhoConfirmacao.'
+                                 class="btn btn-link">
+                                   Informar recebimento <i class="fa fa-check" aria-hidden="true"></i>
+                               </button>';
+
+                          // echo '<a href="aReceber-confirma.php?id='.$conta['id_parcela']. '&mes=mes'.$i.' "> Informar recebimento <i class="fa fa-check" aria-hidden="true"></i></a>';
                         } else {
-                          echo '<a href="aReceber-desfaz.php?id='.$conta['id_parcela']. ' "> Desfazer <i class="fa fa-undo" aria-hidden="true"></i></a>';                                                }
+                          // echo '<a href="aReceber-desfaz.php?id='.$conta['id_parcela']. '&mes=mes'.$i.' "> Desfazer <i class="fa fa-undo" aria-hidden="true"></i></a>
+                          $caminhoCancelamento = "aReceber-desfaz.php?id=".$conta['id_parcela']."&mes=mes".$i;
+                          echo '<button type="submit"
+                                 formaction='.$caminhoCancelamento.'
+                                 class="btn btn-link">
+                                   Desfazer <i class="fa fa-check" aria-hidden="true"></i>
+                               </button>';
+                        }
                          ?>
                        </td>
                        <?php if ($conta['recebido'] == 'n') {
@@ -148,6 +175,7 @@ function alteraMes($i){
                        }
                         ?>
 
+                        </form>
                     </tr>
 
                     <!-- Fim do for -->
@@ -211,11 +239,31 @@ function alteraMes($i){
 </div>
         </div>
 
-         <script>
-function imprime() {
-    window.print();
-}
-</script>
+    <script>
+    function imprime() {
+        window.print();
+    }
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script>
+      function extraiMes() {
+        nome = window.location.search.substring(1);
+        posicao = nome.search("mes");
+        mes = nome.substring(posicao);
+        valor_mes = mes.substring(mes.search("=")+1);
+        return valor_mes;
+      }
+
+      $(document).ready(function (){
+        var mes = extraiMes();
+        $('html, body').animate({
+            scrollTop: $("#"+mes).offset().top
+        }, 50);
+      });
+    </script>
+
+
     <!--/div>
     <!-- /#wrapper -->
 
